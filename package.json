@@ -1,0 +1,93 @@
+{
+    "name": "tsdoc",
+    "displayName": "tsdoc",
+    "description": "creating tsdoc for you",
+    "version": "0.0.1",
+    "publisher": "andyharis",
+    "engines": {
+        "vscode": "^1.21.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.tsdoc"
+    ],
+    "main": "./out/root",
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "TSdoc configuration",
+            "properties": {
+                "tsdoc.addDescription": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "title": "This type will be used for JSdoc",
+                        "description": "This type will be used for JSdoc",
+                        "enum": [
+                            "enum",
+                            "interface",
+                            "type",
+                            "function",
+                            "arrowfn"
+                        ]
+                    },
+                    "default": [
+                        "enum",
+                        "interface",
+                        "type",
+                        "function",
+                        "arrowfn"
+                    ],
+                    "description": "What types should be JSdoc'ed"
+                },
+                "tsdoc.addReturns": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "tsdoc.interface": {
+                    "type": "object",
+                    "properties": {
+                        "addMainDescription": {
+                            "type": "boolean",
+                            "title": "Description in JSdoc",
+                            "description": "Add description to interface."
+                        }
+                    },
+                    "default": {
+                        "addMainDescription": true
+                    }
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "extension.tsdoc",
+                "title": "Create TSDoc"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "extension.tsdoc",
+                "key": "ctrl+f1",
+                "mac": "cmd+f1",
+                "when": "editorTextFocus"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "tslint": "^5.8.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
